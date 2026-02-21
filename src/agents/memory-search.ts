@@ -1,5 +1,6 @@
 import os from "node:os";
 import path from "node:path";
+import { DEFAULT_GEMINI_EMBEDDING_MODEL } from "../config/model-defaults.js";
 import type { OpenClawConfig, MemorySearchConfig } from "../config/config.js";
 import { resolveStateDir } from "../config/paths.js";
 import { clampInt, clampNumber, resolveUserPath } from "../utils.js";
@@ -79,7 +80,7 @@ export type ResolvedMemorySearchConfig = {
 };
 
 const DEFAULT_OPENAI_MODEL = "text-embedding-3-small";
-const DEFAULT_GEMINI_MODEL = "gemini-embedding-001";
+const DEFAULT_GEMINI_MODEL = DEFAULT_GEMINI_EMBEDDING_MODEL;
 const DEFAULT_VOYAGE_MODEL = "voyage-4-large";
 const DEFAULT_CHUNK_TOKENS = 400;
 const DEFAULT_CHUNK_OVERLAP = 80;

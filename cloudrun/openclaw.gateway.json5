@@ -1,0 +1,50 @@
+{
+  gateway: {
+    bind: "lan",
+    port: 8080,
+    controlUi: {
+      enabled: false
+    },
+    auth: {
+      mode: "token"
+    },
+    http: {
+      endpoints: {
+        chatCompletions: {
+          enabled: true
+        }
+      }
+    }
+  },
+  canvasHost: {
+    enabled: false
+  },
+  // Lock down capabilities in Cloud Run: no host shell / config writes / restarts,
+  // and deny exec by default. This keeps the gateway from having "coding-level"
+  // access beyond its own isolated container process.
+  commands: {
+    bash: false,
+    config: false,
+    restart: false,
+    debug: false
+  },
+  tools: {
+    elevated: { enabled: false },
+    exec: { security: "deny" },
+    fs: { workspaceOnly: true }
+  },
+  agents: {
+    defaults: {
+      model: {
+        primary: "google/gemini-2.5-flash",
+        fallbacks: []
+      },
+      tools: {
+        elevated: { enabled: false },
+        exec: { security: "deny" },
+        fs: { workspaceOnly: true }
+      }
+    }
+  }
+}
+

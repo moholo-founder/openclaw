@@ -1,6 +1,7 @@
 import { DEFAULT_CONTEXT_TOKENS } from "../agents/defaults.js";
 import { parseModelRef } from "../agents/model-selection.js";
 import { DEFAULT_AGENT_MAX_CONCURRENT, DEFAULT_SUBAGENT_MAX_CONCURRENT } from "./agent-limits.js";
+import { DEFAULT_GOOGLE_MODEL_REF, DEFAULT_GOOGLE_PRO_MODEL_REF } from "./model-defaults.js";
 import { resolveTalkApiKey } from "./talk.js";
 import type { OpenClawConfig } from "./types.js";
 import type { ModelDefinitionConfig } from "./types.models.js";
@@ -20,9 +21,9 @@ const DEFAULT_MODEL_ALIASES: Readonly<Record<string, string>> = {
   gpt: "openai/gpt-5.2",
   "gpt-mini": "openai/gpt-5-mini",
 
-  // Google Gemini (3.x are preview ids in the catalog)
-  gemini: "google/gemini-3-pro-preview",
-  "gemini-flash": "google/gemini-3-flash-preview",
+  // Google Gemini
+  gemini: DEFAULT_GOOGLE_PRO_MODEL_REF,
+  "gemini-flash": DEFAULT_GOOGLE_MODEL_REF,
 };
 
 const DEFAULT_MODEL_COST: ModelDefinitionConfig["cost"] = {

@@ -1,3 +1,4 @@
+import { DEFAULT_GOOGLE_MODEL, DEFAULT_GOOGLE_PRO_MODEL } from "../config/model-defaults.js";
 import type { ModelDefinitionConfig } from "../config/types.js";
 import { createSubsystemLogger } from "../logging/subsystem.js";
 
@@ -226,20 +227,20 @@ export const VENICE_MODEL_CATALOG = [
 
   // Google (via Venice)
   {
-    id: "gemini-3-pro-preview",
-    name: "Gemini 3 Pro (via Venice)",
+    id: DEFAULT_GOOGLE_PRO_MODEL,
+    name: "Gemini 2.5 Pro (via Venice)",
     reasoning: true,
     input: ["text", "image"],
-    contextWindow: 202752,
+    contextWindow: 1048576,
     maxTokens: 8192,
     privacy: "anonymized",
   },
   {
-    id: "gemini-3-flash-preview",
-    name: "Gemini 3 Flash (via Venice)",
+    id: DEFAULT_GOOGLE_MODEL,
+    name: "Gemini 2.5 Flash (via Venice)",
     reasoning: true,
     input: ["text", "image"],
-    contextWindow: 262144,
+    contextWindow: 1048576,
     maxTokens: 8192,
     privacy: "anonymized",
   },

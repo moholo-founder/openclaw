@@ -348,12 +348,6 @@ function resolveApiKeyFromProfiles(params: {
 }
 
 export function normalizeGoogleModelId(id: string): string {
-  if (id === "gemini-3-pro") {
-    return "gemini-3-pro-preview";
-  }
-  if (id === "gemini-3-flash") {
-    return "gemini-3-flash-preview";
-  }
   return id;
 }
 

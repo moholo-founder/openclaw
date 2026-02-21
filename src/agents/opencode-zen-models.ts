@@ -11,6 +11,7 @@
  * Auth URL: https://opencode.ai/auth
  */
 
+import { DEFAULT_GOOGLE_MODEL, DEFAULT_GOOGLE_PRO_MODEL } from "../config/model-defaults.js";
 import type { ModelApi, ModelDefinitionConfig } from "../config/types.js";
 import { createSubsystemLogger } from "../logging/subsystem.js";
 
@@ -63,16 +64,10 @@ export const OPENCODE_ZEN_MODEL_ALIASES: Record<string, string> = {
   "codex-max": "gpt-5.1-codex-max",
 
   // Gemini
-  gemini: "gemini-3-pro",
-  "gemini-pro": "gemini-3-pro",
-  "gemini-3": "gemini-3-pro",
-  flash: "gemini-3-flash",
-  "gemini-flash": "gemini-3-flash",
-
-  // Legacy Gemini 2.5 aliases (map to the nearest current Gemini tier).
-  "gemini-2.5": "gemini-3-pro",
-  "gemini-2.5-pro": "gemini-3-pro",
-  "gemini-2.5-flash": "gemini-3-flash",
+  gemini: DEFAULT_GOOGLE_PRO_MODEL,
+  "gemini-pro": DEFAULT_GOOGLE_PRO_MODEL,
+  flash: DEFAULT_GOOGLE_MODEL,
+  "gemini-flash": DEFAULT_GOOGLE_MODEL,
 
   // GLM (free)
   glm: "glm-4.7",
@@ -128,7 +123,7 @@ const MODEL_COSTS: Record<
   },
   "claude-opus-4-6": { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
   "claude-opus-4-5": { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
-  "gemini-3-pro": { input: 2, output: 12, cacheRead: 0.2, cacheWrite: 0 },
+  [DEFAULT_GOOGLE_PRO_MODEL]: { input: 2, output: 12, cacheRead: 0.2, cacheWrite: 0 },
   "gpt-5.1-codex-mini": {
     input: 0.25,
     output: 2,
@@ -137,7 +132,7 @@ const MODEL_COSTS: Record<
   },
   "gpt-5.1": { input: 1.07, output: 8.5, cacheRead: 0.107, cacheWrite: 0 },
   "glm-4.7": { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-  "gemini-3-flash": { input: 0.5, output: 3, cacheRead: 0.05, cacheWrite: 0 },
+  [DEFAULT_GOOGLE_MODEL]: { input: 0.3, output: 2.5, cacheRead: 0.03, cacheWrite: 0 },
   "gpt-5.1-codex-max": {
     input: 1.25,
     output: 10,
@@ -153,11 +148,11 @@ const MODEL_CONTEXT_WINDOWS: Record<string, number> = {
   "gpt-5.1-codex": 400000,
   "claude-opus-4-6": 1000000,
   "claude-opus-4-5": 200000,
-  "gemini-3-pro": 1048576,
+  [DEFAULT_GOOGLE_PRO_MODEL]: 1048576,
   "gpt-5.1-codex-mini": 400000,
   "gpt-5.1": 400000,
   "glm-4.7": 204800,
-  "gemini-3-flash": 1048576,
+  [DEFAULT_GOOGLE_MODEL]: 1048576,
   "gpt-5.1-codex-max": 400000,
   "gpt-5.2": 400000,
 };
@@ -170,11 +165,11 @@ const MODEL_MAX_TOKENS: Record<string, number> = {
   "gpt-5.1-codex": 128000,
   "claude-opus-4-6": 128000,
   "claude-opus-4-5": 64000,
-  "gemini-3-pro": 65536,
+  [DEFAULT_GOOGLE_PRO_MODEL]: 65536,
   "gpt-5.1-codex-mini": 128000,
   "gpt-5.1": 128000,
   "glm-4.7": 131072,
-  "gemini-3-flash": 65536,
+  [DEFAULT_GOOGLE_MODEL]: 65536,
   "gpt-5.1-codex-max": 128000,
   "gpt-5.2": 128000,
 };
@@ -207,11 +202,11 @@ const MODEL_NAMES: Record<string, string> = {
   "gpt-5.1-codex": "GPT-5.1 Codex",
   "claude-opus-4-6": "Claude Opus 4.6",
   "claude-opus-4-5": "Claude Opus 4.5",
-  "gemini-3-pro": "Gemini 3 Pro",
+  [DEFAULT_GOOGLE_PRO_MODEL]: "Gemini 2.5 Pro",
   "gpt-5.1-codex-mini": "GPT-5.1 Codex Mini",
   "gpt-5.1": "GPT-5.1",
   "glm-4.7": "GLM-4.7",
-  "gemini-3-flash": "Gemini 3 Flash",
+  [DEFAULT_GOOGLE_MODEL]: "Gemini 2.5 Flash",
   "gpt-5.1-codex-max": "GPT-5.1 Codex Max",
   "gpt-5.2": "GPT-5.2",
 };
@@ -235,11 +230,11 @@ export function getOpencodeZenStaticFallbackModels(): ModelDefinitionConfig[] {
     "gpt-5.1-codex",
     "claude-opus-4-6",
     "claude-opus-4-5",
-    "gemini-3-pro",
+    DEFAULT_GOOGLE_PRO_MODEL,
     "gpt-5.1-codex-mini",
     "gpt-5.1",
     "glm-4.7",
-    "gemini-3-flash",
+    DEFAULT_GOOGLE_MODEL,
     "gpt-5.1-codex-max",
     "gpt-5.2",
   ];

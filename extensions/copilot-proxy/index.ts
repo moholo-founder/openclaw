@@ -4,6 +4,7 @@ import {
   type ProviderAuthContext,
   type ProviderAuthResult,
 } from "openclaw/plugin-sdk";
+import { DEFAULT_GOOGLE_MODEL, DEFAULT_GOOGLE_PRO_MODEL } from "../../src/config/model-defaults.js";
 
 const DEFAULT_BASE_URL = "http://localhost:3000/v1";
 const DEFAULT_API_KEY = "n/a";
@@ -20,8 +21,8 @@ const DEFAULT_MODEL_IDS = [
   "claude-opus-4.5",
   "claude-sonnet-4.5",
   "claude-haiku-4.5",
-  "gemini-3-pro",
-  "gemini-3-flash",
+  DEFAULT_GOOGLE_PRO_MODEL,
+  DEFAULT_GOOGLE_MODEL,
   "grok-code-fast-1",
 ] as const;
 

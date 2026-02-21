@@ -4,11 +4,12 @@ import {
   type OpenClawPluginApi,
   type ProviderAuthContext,
 } from "openclaw/plugin-sdk";
+import { DEFAULT_GOOGLE_MODEL } from "../../src/config/model-defaults.js";
 import { loginGeminiCliOAuth } from "./oauth.js";
 
 const PROVIDER_ID = "google-gemini-cli";
 const PROVIDER_LABEL = "Gemini CLI OAuth";
-const DEFAULT_MODEL = "google-gemini-cli/gemini-3-pro-preview";
+const DEFAULT_MODEL = `google-gemini-cli/${DEFAULT_GOOGLE_MODEL}`;
 const ENV_VARS = [
   "OPENCLAW_GEMINI_OAUTH_CLIENT_ID",
   "OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET",

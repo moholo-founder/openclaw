@@ -1,8 +1,9 @@
+import { DEFAULT_GOOGLE_MODEL } from "../../../config/model-defaults.js";
 import type { VideoDescriptionRequest, VideoDescriptionResult } from "../../types.js";
 import { generateGeminiInlineDataText } from "./inline-data.js";
 
 export const DEFAULT_GOOGLE_VIDEO_BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
-const DEFAULT_GOOGLE_VIDEO_MODEL = "gemini-3-flash-preview";
+const DEFAULT_GOOGLE_VIDEO_MODEL = DEFAULT_GOOGLE_MODEL;
 const DEFAULT_GOOGLE_VIDEO_PROMPT = "Describe the video.";
 
 export async function describeGeminiVideo(

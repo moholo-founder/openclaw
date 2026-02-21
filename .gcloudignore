@@ -1,0 +1,9 @@
+# Keep Cloud Run source deploy predictable for OpenClaw Docker builds.
+# Do not include .gitignore here because this repo's .gitignore excludes
+# files (like pnpm-lock.yaml) that the Dockerfile explicitly copies.
+.gcloudignore
+.git
+node_modules
+dist
+
+

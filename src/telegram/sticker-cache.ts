@@ -9,6 +9,7 @@ import {
 } from "../agents/model-catalog.js";
 import { resolveDefaultModelForAgent } from "../agents/model-selection.js";
 import type { OpenClawConfig } from "../config/config.js";
+import { DEFAULT_GOOGLE_MODEL } from "../config/model-defaults.js";
 import { STATE_DIR } from "../config/paths.js";
 import { logVerbose } from "../globals.js";
 import { loadJsonFile, saveJsonFile } from "../infra/json-file.js";
@@ -196,7 +197,7 @@ export async function describeStickerImage(params: DescribeStickerParams): Promi
         : provider === "anthropic"
           ? "claude-opus-4-6"
           : provider === "google"
-            ? "gemini-3-flash-preview"
+            ? DEFAULT_GOOGLE_MODEL
             : "MiniMax-VL-01";
     const preferred = entries.find((entry) => entry.id === defaultId);
     return preferred ?? entries[0];
