@@ -4,6 +4,7 @@ import {
 } from "../agents/api-key-rotation.js";
 import { requireApiKey, resolveApiKeyForProvider } from "../agents/model-auth.js";
 import { parseGeminiAuth } from "../infra/gemini-auth.js";
+import { DEFAULT_GEMINI_EMBEDDING_MODEL as EMBEDDING_MODEL_DEFAULT } from "../config/model-defaults.js";
 import { debugEmbeddingsLog } from "./embeddings-debug.js";
 import type { EmbeddingProvider, EmbeddingProviderOptions } from "./embeddings.js";
 
@@ -16,7 +17,7 @@ export type GeminiEmbeddingClient = {
 };
 
 const DEFAULT_GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
-export const DEFAULT_GEMINI_EMBEDDING_MODEL = "gemini-embedding-001";
+export const DEFAULT_GEMINI_EMBEDDING_MODEL = EMBEDDING_MODEL_DEFAULT;
 const GEMINI_MAX_INPUT_TOKENS: Record<string, number> = {
   "text-embedding-004": 2048,
 };

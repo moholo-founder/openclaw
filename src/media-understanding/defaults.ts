@@ -1,3 +1,4 @@
+import { DEFAULT_GOOGLE_MODEL } from "../config/model-defaults.js";
 import type { MediaUnderstandingCapability } from "./types.js";
 
 const MB = 1024 * 1024;
@@ -45,7 +46,7 @@ export const AUTO_VIDEO_KEY_PROVIDERS = ["google"] as const;
 export const DEFAULT_IMAGE_MODELS: Record<string, string> = {
   openai: "gpt-5-mini",
   anthropic: "claude-opus-4-6",
-  google: "gemini-3-flash-preview",
+  google: DEFAULT_GOOGLE_MODEL,
   minimax: "MiniMax-VL-01",
   zai: "glm-4.6v",
 };

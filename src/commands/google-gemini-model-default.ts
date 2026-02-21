@@ -1,7 +1,8 @@
 import type { OpenClawConfig } from "../config/config.js";
+import { DEFAULT_GOOGLE_MODEL_REF } from "../config/model-defaults.js";
 import { applyAgentDefaultPrimaryModel } from "./model-default.js";
 
-export const GOOGLE_GEMINI_DEFAULT_MODEL = "google/gemini-3-pro-preview";
+export const GOOGLE_GEMINI_DEFAULT_MODEL = DEFAULT_GOOGLE_MODEL_REF;
 
 export function applyGoogleGeminiModelDefault(cfg: OpenClawConfig): {
   next: OpenClawConfig;
