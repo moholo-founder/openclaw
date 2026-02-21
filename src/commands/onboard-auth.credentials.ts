@@ -34,6 +34,8 @@ const PROVIDER_ENV_VARS: Record<string, readonly string[]> = {
   huggingface: ["HUGGINGFACE_HUB_TOKEN", "HF_TOKEN"],
   qianfan: ["QIANFAN_API_KEY"],
   xai: ["XAI_API_KEY"],
+  volcengine: ["VOLCANO_ENGINE_API_KEY"],
+  byteplus: ["BYTEPLUS_API_KEY"],
 };
 
 function isSecretRef(value: unknown): value is SecretRef {
@@ -272,6 +274,22 @@ export async function setKimiCodingApiKey(key: SecretInput, agentDir?: string) {
   upsertAuthProfile({
     profileId: "kimi-coding:default",
     credential: buildApiKeyCredential("kimi-coding", key),
+    agentDir: resolveAuthAgentDir(agentDir),
+  });
+}
+
+export async function setVolcengineApiKey(key: SecretInput, agentDir?: string) {
+  upsertAuthProfile({
+    profileId: "volcengine:default",
+    credential: buildApiKeyCredential("volcengine", key),
+    agentDir: resolveAuthAgentDir(agentDir),
+  });
+}
+
+export async function setByteplusApiKey(key: SecretInput, agentDir?: string) {
+  upsertAuthProfile({
+    profileId: "byteplus:default",
+    credential: buildApiKeyCredential("byteplus", key),
     agentDir: resolveAuthAgentDir(agentDir),
   });
 }
