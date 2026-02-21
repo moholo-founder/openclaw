@@ -71,7 +71,7 @@ describe("models list auth-profile sync", () => {
           );
           expect(openrouter).toBeDefined();
           expect(openrouter?.available).toBe(true);
-          expect(await pathExists(authPath)).toBe(true);
+          expect(await pathExists(authPath)).toBe(false);
         },
       );
     } finally {
