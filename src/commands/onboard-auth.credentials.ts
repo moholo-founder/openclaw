@@ -14,6 +14,7 @@ const resolveAuthAgentDir = (agentDir?: string) => agentDir ?? resolveOpenClawAg
 const ENV_REF_PATTERN = /^\$\{([A-Z][A-Z0-9_]*)\}$/;
 
 const PROVIDER_ENV_VARS: Record<string, readonly string[]> = {
+  openai: ["OPENAI_API_KEY"],
   anthropic: ["ANTHROPIC_API_KEY"],
   google: ["GEMINI_API_KEY"],
   minimax: ["MINIMAX_API_KEY"],
@@ -222,6 +223,14 @@ export async function setAnthropicApiKey(key: SecretInput, agentDir?: string) {
   upsertAuthProfile({
     profileId: "anthropic:default",
     credential: buildApiKeyCredential("anthropic", key),
+    agentDir: resolveAuthAgentDir(agentDir),
+  });
+}
+
+export async function setOpenaiApiKey(key: SecretInput, agentDir?: string) {
+  upsertAuthProfile({
+    profileId: "openai:default",
+    credential: buildApiKeyCredential("openai", key),
     agentDir: resolveAuthAgentDir(agentDir),
   });
 }
