@@ -31,18 +31,19 @@
   tools: {
     elevated: { enabled: false },
     exec: { security: "deny" },
-    fs: { workspaceOnly: true }
+    fs: { workspaceOnly: true },
+    web: {
+      search: {
+        enabled: true,
+        provider: "gemini"
+      }
+    }
   },
   agents: {
     defaults: {
       model: {
         primary: "google/gemini-2.5-flash",
         fallbacks: []
-      },
-      tools: {
-        elevated: { enabled: false },
-        exec: { security: "deny" },
-        fs: { workspaceOnly: true }
       }
     }
   }
