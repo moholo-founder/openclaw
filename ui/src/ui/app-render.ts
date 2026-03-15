@@ -8,7 +8,7 @@ import type { AppViewState } from "./app-view-state.ts";
 import { loadAgentFileContent, loadAgentFiles, saveAgentFile } from "./controllers/agent-files.ts";
 import { loadAgentIdentities, loadAgentIdentity } from "./controllers/agent-identity.ts";
 import { loadAgentSkills } from "./controllers/agent-skills.ts";
-import { loadAgents } from "./controllers/agents.ts";
+import { createAgent, loadAgents, updateAgent } from "./controllers/agents.ts";
 import { loadChannels } from "./controllers/channels.ts";
 import { loadChatHistory } from "./controllers/chat.ts";
 import {
@@ -678,6 +678,12 @@ export function renderApp(state: AppViewState) {
                     ? { primary, fallbacks: normalized }
                     : { fallbacks: normalized };
                   updateConfigFormValue(state, basePath, next);
+                },
+                onCreateAgent: (payload) => {
+                  void createAgent(state, payload);
+                },
+                onUpdateAgent: (payload) => {
+                  void updateAgent(state, payload);
                 },
               })
             : nothing

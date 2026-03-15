@@ -31,7 +31,13 @@
   tools: {
     elevated: { enabled: false },
     exec: { security: "deny" },
-    fs: { workspaceOnly: true }
+    fs: { workspaceOnly: true },
+    web: {
+      search: {
+        enabled: true,
+        provider: "gemini"
+      }
+    }
   },
   agents: {
     defaults: {

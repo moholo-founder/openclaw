@@ -35,3 +35,27 @@ export async function loadAgents(state: AgentsState) {
     state.agentsLoading = false;
   }
 }
+
+export async function createAgent(
+  state: AgentsState,
+  payload: { name: string; workspace: string; emoji?: string; avatar?: string },
+) {
+  if (!state.client || !state.connected) {
+    return null;
+  }
+  await state.client.request("agents.create", payload);
+  await loadAgents(state);
+  return true;
+}
+
+export async function updateAgent(
+  state: AgentsState,
+  payload: { agentId: string; name?: string; workspace?: string; model?: string; avatar?: string },
+) {
+  if (!state.client || !state.connected) {
+    return null;
+  }
+  await state.client.request("agents.update", payload);
+  await loadAgents(state);
+  return true;
+}

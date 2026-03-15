@@ -84,6 +84,19 @@ export type AgentsProps = {
   onAgentSkillToggle: (agentId: string, skillName: string, enabled: boolean) => void;
   onAgentSkillsClear: (agentId: string) => void;
   onAgentSkillsDisableAll: (agentId: string) => void;
+  onCreateAgent: (payload: {
+    name: string;
+    workspace: string;
+    emoji?: string;
+    avatar?: string;
+  }) => void;
+  onUpdateAgent: (payload: {
+    agentId: string;
+    name?: string;
+    workspace?: string;
+    model?: string;
+    avatar?: string;
+  }) => void;
 };
 
 export type AgentContext = {
@@ -115,6 +128,73 @@ export function renderAgents(props: AgentsProps) {
             ${props.loading ? "Loading…" : "Refresh"}
           </button>
         </div>
+        <div class="card" style="margin-top: 12px;">
+          <div class="card-title">Create Agent</div>
+          <div class="card-sub">Name, workspace, and optional avatar.</div>
+          <div class="row" style="margin-top: 8px; gap: 8px; flex-wrap: wrap;">
+            <input id="create-agent-name" placeholder="name" />
+            <input id="create-agent-workspace" placeholder="/abs/workspace/path" />
+            <input id="create-agent-emoji" placeholder="emoji (optional)" />
+            <input id="create-agent-avatar" placeholder="avatar URL (optional)" />
+          </div>
+          <div class="row" style="margin-top: 8px; justify-content: flex-end;">
+            <button
+              class="btn btn--sm primary"
+              @click=${() => {
+                const name =
+                  (
+                    document.getElementById("create-agent-name") as HTMLInputElement | null
+                  )?.value?.trim() || "";
+                const workspace =
+                  (
+                    document.getElementById("create-agent-workspace") as HTMLInputElement | null
+                  )?.value?.trim() || "";
+                const emoji =
+                  (
+                    document.getElementById("create-agent-emoji") as HTMLInputElement | null
+                  )?.value?.trim() || "";
+                const avatar =
+                  (
+                    document.getElementById("create-agent-avatar") as HTMLInputElement | null
+                  )?.value?.trim() || "";
+                if (!name || !workspace) {
+                  return;
+                }
+                props.onCreateAgent({
+                  name,
+                  workspace,
+                  ...(emoji ? { emoji } : {}),
+                  ...(avatar ? { avatar } : {}),
+                });
+              }}
+            >
+              Create
+            </button>
+          </div>
+        </div>
+        ${
+          selectedAgent
+            ? html`
+                <div class="row" style="margin-top: 8px; justify-content: flex-end;">
+                  <button
+                    class="btn btn--sm"
+                    @click=${() => {
+                      const nextName = window.prompt(
+                        "Update agent name",
+                        normalizeAgentLabel(selectedAgent) || "",
+                      );
+                      if (!nextName) {
+                        return;
+                      }
+                      props.onUpdateAgent({ agentId: selectedAgent.id, name: nextName.trim() });
+                    }}
+                  >
+                    Rename Selected
+                  </button>
+                </div>
+              `
+            : nothing
+        }
         ${
           props.error
             ? html`<div class="callout danger" style="margin-top: 12px;">${props.error}</div>`
