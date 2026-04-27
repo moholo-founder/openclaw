@@ -239,7 +239,9 @@ export const ToolPolicySchema = ToolPolicyBaseSchema.superRefine((value, ctx) =>
 export const ToolsWebSearchSchema = z
   .object({
     enabled: z.boolean().optional(),
-    provider: z.union([z.literal("brave"), z.literal("perplexity"), z.literal("grok"), z.literal("gemini")]).optional(),
+    provider: z
+      .union([z.literal("brave"), z.literal("perplexity"), z.literal("grok"), z.literal("gemini")])
+      .optional(),
     apiKey: z.string().optional().register(sensitive),
     maxResults: z.number().int().positive().optional(),
     timeoutSeconds: z.number().int().positive().optional(),
@@ -288,6 +290,16 @@ export const ToolsWebSchema = z
   .object({
     search: ToolsWebSearchSchema,
     fetch: ToolsWebFetchSchema,
+  })
+  .strict()
+  .optional();
+
+export const ToolsEmailSchema = z
+  .object({
+    enabled: z.boolean().optional(),
+    apiKey: z.string().optional().register(sensitive),
+    from: z.string().optional(),
+    defaultTo: z.string().optional(),
   })
   .strict()
   .optional();
@@ -644,6 +656,7 @@ export const ToolsSchema = z
     deny: z.array(z.string()).optional(),
     byProvider: z.record(z.string(), ToolPolicyWithProfileSchema).optional(),
     web: ToolsWebSchema,
+    email: ToolsEmailSchema,
     media: ToolsMediaSchema,
     links: ToolsLinksSchema,
     sessions: z

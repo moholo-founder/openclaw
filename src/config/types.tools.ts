@@ -458,6 +458,17 @@ export type ToolsConfig = {
       };
     };
   };
+  /** Outbound email via Resend (`email` tool; owner-only). */
+  email?: {
+    /** When false, the email tool returns a disabled error. */
+    enabled?: boolean;
+    /** Resend API key (optional; defaults to RESEND_API_KEY env var). */
+    apiKey?: string;
+    /** Default From header (falls back to RESEND_FROM, then onboarding@resend.dev). */
+    from?: string;
+    /** When set, the tool may omit `to` and deliver here (e.g. support inbox). */
+    defaultTo?: string;
+  };
   media?: MediaToolsConfig;
   links?: LinkToolsConfig;
   /** Message tool configuration. */

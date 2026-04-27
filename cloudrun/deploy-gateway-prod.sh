@@ -4,6 +4,8 @@ echo "🚀 Deploying OpenClaw Gateway to PRODUCTION..."
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 OPENCLAW_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+source "$ROOT_DIR/allais/scripts/require-human-prod-deploy.sh"
 PROJECT="moholo-beta"
 REGION="us-central1"
 SERVICE="openclaw-gateway-production"
@@ -32,12 +34,8 @@ gcloud run deploy "$SERVICE" \
   --timeout 600 \
   --command "node" \
   --args "openclaw.mjs,gateway,--allow-unconfigured,--bind,lan,--port,8080" \
-  --set-env-vars "\
-OPENCLAW_CONFIG_PATH=/app/cloudrun/openclaw.gateway.json5,\
-OPENCLAW_GATEWAY_TOKEN=3df1cf59c3ff0cbfc37074a6e810f8b2a7f2ff9d24a578f5445fcf2e29082679,\
-GOOGLE_API_KEY=AIzaSyBaa2iB3QYhfK18E2EPmLA7uey0cQETltU,\
-GOOGLE_CLOUD_PROJECT=moholo-beta,\
-NODE_ENV=production"
+  --set-env-vars "OPENCLAW_CONFIG_PATH=/app/cloudrun/openclaw.gateway.json5,GOOGLE_CLOUD_PROJECT=moholo-beta,NODE_ENV=production" \
+  --set-secrets "OPENCLAW_GATEWAY_TOKEN=OPENCLAW_GATEWAY_TOKEN:latest,GOOGLE_API_KEY=GOOGLE_API_KEY:latest"
 
 echo "🔄 Routing traffic to new revision..."
 gcloud run services update-traffic "$SERVICE" \

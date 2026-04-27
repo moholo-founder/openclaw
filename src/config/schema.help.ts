@@ -125,8 +125,7 @@ export const FIELD_HELP: Record<string, string> = {
     'Perplexity model override (default: "perplexity/sonar-pro").',
   "tools.web.search.gemini.apiKey":
     "Google API key for Gemini search (fallback: GEMINI_API_KEY or GOOGLE_API_KEY env var).",
-  "tools.web.search.gemini.model":
-    'Gemini model override (default: "gemini-2.0-flash-lite").',
+  "tools.web.search.gemini.model": 'Gemini model override (default: "gemini-2.0-flash-lite").',
   "tools.web.fetch.enabled": "Enable the web_fetch tool (lightweight HTTP fetch).",
   "tools.web.fetch.maxChars": "Max characters returned by web_fetch (truncated).",
   "tools.web.fetch.maxCharsCap":
@@ -146,6 +145,11 @@ export const FIELD_HELP: Record<string, string> = {
   "tools.web.fetch.firecrawl.maxAgeMs":
     "Firecrawl maxAge (ms) for cached results when supported by the API.",
   "tools.web.fetch.firecrawl.timeoutSeconds": "Timeout in seconds for Firecrawl requests.",
+  "tools.email.enabled": "When false, the owner-only `email` tool refuses to send.",
+  "tools.email.apiKey": "Resend API key (fallback: RESEND_API_KEY env var).",
+  "tools.email.from": "Default From address (fallback: RESEND_FROM, then onboarding@resend.dev).",
+  "tools.email.defaultTo":
+    "Optional default recipient when the tool omits `to` (e.g. support@yourdomain.com).",
   "channels.slack.allowBots":
     "Allow bot-authored messages to trigger Slack replies (default: false).",
   "channels.slack.thread.historyScope":

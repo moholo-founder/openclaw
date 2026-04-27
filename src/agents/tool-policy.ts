@@ -45,7 +45,7 @@ export const TOOL_GROUPS: Record<string, string[]> = {
   // UI helpers
   "group:ui": ["browser", "canvas"],
   // Automation + infra
-  "group:automation": ["cron", "gateway"],
+  "group:automation": ["cron", "gateway", "email"],
   // Messaging surface
   "group:messaging": ["message"],
   // Nodes + device tools
@@ -70,10 +70,16 @@ export const TOOL_GROUPS: Record<string, string[]> = {
     "web_search",
     "web_fetch",
     "image",
+    "email",
   ],
 };
 
-const OWNER_ONLY_TOOL_NAME_FALLBACKS = new Set<string>(["whatsapp_login", "cron", "gateway"]);
+const OWNER_ONLY_TOOL_NAME_FALLBACKS = new Set<string>([
+  "whatsapp_login",
+  "cron",
+  "gateway",
+  "email",
+]);
 
 const TOOL_PROFILES: Record<ToolProfileId, ToolProfilePolicy> = {
   minimal: {
@@ -89,6 +95,7 @@ const TOOL_PROFILES: Record<ToolProfileId, ToolProfilePolicy> = {
       "sessions_history",
       "sessions_send",
       "session_status",
+      "email",
     ],
   },
   full: {},
